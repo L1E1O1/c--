@@ -1,0 +1,3 @@
+C:\Users\Max\OneDrive\Skrivbord\c++\BilRegister\BilRegister\x64\Debug\BilRegister.vcxproj.AssemblyReference.cache
+C:\Users\Max\OneDrive\Skrivbord\c++\BilRegister\BilRegister\x64\Debug\BilRegister.MyForm.resources
+C:\Users\Max\OneDrive\Skrivbord\c++\BilRegister\BilRegister\x64\Debug\BilRegister.vcxproj.GenerateResource.cache
