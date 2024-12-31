@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -58,6 +59,7 @@ public:
 
 int main()
 {
+  
 
     Person p("John", "jones"); // this assigns first and last automatically making it impossible to only output first or last names
 
@@ -74,10 +76,18 @@ int main()
     e.setLast("Smith");
        e.printInfo();
 
-    cout << e.getDepartment()<< endl;
 
-    p.printfullName();
-    e.printfullName();
+  vector<Person> people;
+
+    people.push_back(p);
+    people.push_back(e);
+
+
+for (Person person : people){
+    person.printInfo();
+}
+
+
     return 0;
 }
 
