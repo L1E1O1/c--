@@ -9,7 +9,6 @@ protected:
     string firstName;
     string lastName;
     int age;
-    bool Age;
     bool subscribed;
 
 public:
@@ -31,15 +30,6 @@ public:
         cin.ignore(); // Clear newline character from the input buffer
         cout << "You entered: " << age << endl;
 
-        if (age < 18)
-        {
-            Age = false;
-        }
-        else
-        {
-            Age= true;
-        }
-
         cout << "Are you subscribed? (Y/N): ";
         char subscription;
         cin >> subscription;
@@ -47,10 +37,12 @@ public:
         if (subscription == 'Y' || subscription == 'y')
         {
             subscribed = true;
+            cout << "You are subscribed." << endl;
         }
         else if (subscription == 'N' || subscription == 'n')
         {
             subscribed = false;
+            cout << "You are not subscribed." << endl;
         }
         else
         {
@@ -58,54 +50,61 @@ public:
         }
     }
 
-    // Default constructor
-    PersonKonto() = default;
-
     // Method to display user details
-    void display()
+    virtual void display()
     {
         cout << "Name: " << firstName << " " << lastName << endl;
-       if(Age == true){
-        cout << "Age: " << age << " (Underage)" << endl;
-       }
-       else if(Age == false){
-        cout << "Age: " << age << " (Off age)" << endl;
-       }
+        cout << "Age: " << age << endl;
         cout << "Subscription Status: " << (subscribed ? "Subscribed" : "Not Subscribed") << endl;
+    }
+
+    // Virtual destructor || cleans up memory
+    virtual ~PersonKonto() = default; 
+};
+
+// Derived class for underage accounts
+class UnderAge : public PersonKonto
+{
+public:
+    void display() override
+    {
+        cout << "[Underage Account]" << endl;
+        PersonKonto::display();
     }
 };
 
-// Derived classes for different categories of accounts
-class UnderAge : public PersonKonto
-{
-};
+// Derived class for adult accounts
 class OverAge : public PersonKonto
 {
-};
-class basic : public OverAge
-{
-};
-class inDebt_B : public basic
-{
-};
-class payedOff_B : public basic
-{
-};
-class VIP : public OverAge
-{
-};
-class inDebt_VIP : public VIP
-{
-};
-class payedOff_VIP : public VIP
-{
+public:
+    void display() override
+    {
+        cout << "[Adult Account]" << endl;
+        PersonKonto::display();
+    }
 };
 
 int main()
 {
-    PersonKonto person; // Create an instance of PersonKonto
-    person.input();     // Collect input
-    person.display();   // Display user details
+    PersonKonto *person = nullptr; // dont know what it is but it is needed
+
+    // Create a temporary PersonKonto object to get input
+    PersonKonto tempPerson;
+    tempPerson.input();
+
+    // should sort into right class
+    if (tempPerson.age < 18)
+    {
+        person = new UnderAge(tempPerson); 
+    }
+    else
+    {
+        person = new OverAge(tempPerson); 
+    }
+
+    // Display information using the appropriate derived class
+    person->display();
+    
 
     return 0;
 }
