@@ -49,8 +49,6 @@ public:
             cout << "Invalid input for subscription status!" << endl;
         }
     }
-
-    // Method to display user details
     virtual void display()
     {
         cout << "Name: " << firstName << " " << lastName << endl;
@@ -104,7 +102,7 @@ int main()
 
     // Display information using the appropriate derived class
     person->display();
-    
+
 
     return 0;
 }
